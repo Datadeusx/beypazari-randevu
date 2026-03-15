@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Logo from "@/components/Logo";
 
 function FeatureCard({
   title,
@@ -8,37 +9,9 @@ function FeatureCard({
   text: string;
 }) {
   return (
-    <div
-      style={{
-        background: "#ffffff",
-        border: "1px solid #e5e7eb",
-        borderRadius: 24,
-        padding: 24,
-        boxShadow: "0 8px 24px rgba(0,0,0,0.05)",
-      }}
-    >
-      <h3
-        style={{
-          margin: 0,
-          fontSize: 22,
-          fontWeight: 800,
-          color: "#111827",
-        }}
-      >
-        {title}
-      </h3>
-
-      <p
-        style={{
-          marginTop: 12,
-          marginBottom: 0,
-          color: "#4b5563",
-          fontSize: 15,
-          lineHeight: 1.7,
-        }}
-      >
-        {text}
-      </p>
+    <div className="landing-card">
+      <h3 className="landing-cardTitle">{title}</h3>
+      <p className="landing-cardText">{text}</p>
     </div>
   );
 }
@@ -53,52 +26,10 @@ function StepCard({
   text: string;
 }) {
   return (
-    <div
-      style={{
-        background: "#ffffff",
-        border: "1px solid #e5e7eb",
-        borderRadius: 24,
-        padding: 24,
-        boxShadow: "0 8px 24px rgba(0,0,0,0.05)",
-      }}
-    >
-      <div
-        style={{
-          display: "inline-block",
-          padding: "8px 12px",
-          borderRadius: 999,
-          background: "#eef2ff",
-          color: "#3730a3",
-          fontSize: 12,
-          fontWeight: 800,
-          marginBottom: 14,
-        }}
-      >
-        {step}
-      </div>
-
-      <h3
-        style={{
-          margin: 0,
-          fontSize: 22,
-          fontWeight: 800,
-          color: "#111827",
-        }}
-      >
-        {title}
-      </h3>
-
-      <p
-        style={{
-          marginTop: 12,
-          marginBottom: 0,
-          color: "#4b5563",
-          fontSize: 15,
-          lineHeight: 1.7,
-        }}
-      >
-        {text}
-      </p>
+    <div className="landing-card">
+      <div className="landing-pill">{step}</div>
+      <h3 className="landing-cardTitle">{title}</h3>
+      <p className="landing-cardText">{text}</p>
     </div>
   );
 }
@@ -113,252 +44,160 @@ function ContactCard({
   text: string;
 }) {
   return (
-    <div
-      style={{
-        background: "#ffffff",
-        border: "1px solid #e5e7eb",
-        borderRadius: 24,
-        padding: 24,
-        boxShadow: "0 8px 24px rgba(0,0,0,0.05)",
-      }}
-    >
-      <div
-        style={{
-          fontSize: 13,
-          fontWeight: 800,
-          color: "#6b7280",
-          textTransform: "uppercase",
-          letterSpacing: 0.8,
-        }}
-      >
-        {title}
-      </div>
-
-      <div
-        style={{
-          marginTop: 10,
-          fontSize: 24,
-          fontWeight: 900,
-          color: "#111827",
-        }}
-      >
-        {value}
-      </div>
-
-      <p
-        style={{
-          marginTop: 10,
-          marginBottom: 0,
-          color: "#4b5563",
-          fontSize: 15,
-          lineHeight: 1.7,
-        }}
-      >
-        {text}
-      </p>
+    <div className="landing-card">
+      <div className="landing-contactLabel">{title}</div>
+      <div className="landing-contactValue">{value}</div>
+      <p className="landing-cardText">{text}</p>
     </div>
   );
 }
 
 export default function HomePage() {
   return (
-    <main
-      style={{
-        minHeight: "100vh",
-        background: "#f3f4f6",
-        color: "#111827",
-      }}
-    >
-      <div
-        style={{
-          maxWidth: 1280,
-          margin: "0 auto",
-          padding: "24px 16px 48px",
-        }}
-      >
-        <section
-          style={{
-            overflow: "hidden",
-            borderRadius: 32,
-            background:
-              "linear-gradient(135deg, #0f172a 0%, #1e293b 55%, #334155 100%)",
-            color: "#ffffff",
-            padding: 36,
-            boxShadow: "0 12px 30px rgba(0,0,0,0.14)",
-          }}
-        >
-          <div
-            style={{
-              display: "inline-block",
-              padding: "8px 14px",
-              borderRadius: 999,
-              background: "rgba(255,255,255,0.12)",
-              fontSize: 12,
-              fontWeight: 800,
-              marginBottom: 16,
-            }}
-          >
-            Beypazarı için online randevu sistemi
-          </div>
+    <main className="landing-pageRoot">
+      <header className="landing-topBar">
+        <div className="landing-container landing-topBarInner">
+          <Logo />
 
-          <h1
-            style={{
-              margin: 0,
-              fontSize: 56,
-              lineHeight: 1.05,
-              fontWeight: 900,
-              maxWidth: 820,
-              letterSpacing: -1,
-            }}
-          >
-            Güzellik salonları ve kuaförler için sade, hızlı ve modern randevu sistemi
-          </h1>
+          <nav className="landing-navLinks">
+            <a href="#ozellikler" className="landing-navItem">
+              Özellikler
+            </a>
+            <a href="#nasil-calisir" className="landing-navItem">
+              Nasıl Çalışır
+            </a>
+            <a href="#fiyat" className="landing-navItem">
+              Fiyat
+            </a>
+            <a href="#iletisim" className="landing-navItem">
+              İletişim
+            </a>
+          </nav>
 
-          <p
-            style={{
-              marginTop: 18,
-              maxWidth: 820,
-              color: "rgba(255,255,255,0.84)",
-              fontSize: 18,
-              lineHeight: 1.7,
-            }}
-          >
-            Müşterileriniz online randevu alsın, siz panelden hizmetleri,
-            çalışma saatlerini, SMS hatırlatmaları ve kampanya akışlarını yönetin.
-          </p>
-
-          <div
-            style={{
-              display: "flex",
-              gap: 14,
-              flexWrap: "wrap",
-              marginTop: 24,
-            }}
-          >
-            <Link
-              href="/salon/nurseda-guzellik-salonu"
-              style={{
-                textDecoration: "none",
-                background: "#ffffff",
-                color: "#111827",
-                padding: "14px 18px",
-                borderRadius: 18,
-                fontWeight: 800,
-                fontSize: 15,
-              }}
-            >
-              Demo Randevu Sayfasini Ac
+          <div className="landing-navActions">
+            <Link href="/giris" className="landing-ghostButton">
+              Salon Girişi
             </Link>
-
-            <Link
-              href="/giris"
-              style={{
-                textDecoration: "none",
-                background: "rgba(255,255,255,0.08)",
-                color: "#ffffff",
-                padding: "14px 18px",
-                borderRadius: 18,
-                fontWeight: 800,
-                fontSize: 15,
-                border: "1px solid rgba(255,255,255,0.14)",
-              }}
-            >
-              Salon Girisi
+            <Link href="/kayit" className="landing-darkButton">
+              Salon Kaydı
             </Link>
           </div>
+        </div>
+      </header>
 
-          <div
-            style={{
-              display: "flex",
-              flexWrap: "wrap",
-              gap: 12,
-              marginTop: 24,
-            }}
-          >
-            {[
-              "Online randevu",
-              "SMS hatırlatma",
-              "Boş saat kampanyası",
-              "Salon paneli",
-            ].map((item) => (
-              <span
-                key={item}
-                style={{
-                  border: "1px solid rgba(255,255,255,0.14)",
-                  borderRadius: 999,
-                  padding: "8px 14px",
-                  color: "rgba(255,255,255,0.92)",
-                  fontSize: 14,
-                }}
+      <div className="landing-container landing-pageContent">
+        <section className="landing-heroSection">
+          <div className="landing-heroGrid">
+            <div>
+              <div className="landing-heroBadge">
+                Beypazarı için sade ve güçlü randevu altyapısı
+              </div>
+
+              <h1 className="landing-heroTitle">
+                Güzellik salonları ve kuaförler için modern online randevu sistemi
+              </h1>
+
+              <p className="landing-heroText">
+                Müşterileriniz online randevu alsın, siz panelden hizmetleri,
+                çalışma saatlerini, randevuları ve kampanyaları kolayca yönetin.
+                Sade, hızlı ve kullanışlı bir sistem.
+              </p>
+
+              <div className="landing-heroActions">
+                <Link
+                  href="/salon/nurseda-guzellik-salonu"
+                  className="landing-lightButton"
+                >
+                  Demo Randevu Sayfasını Aç
+                </Link>
+
+                <Link href="/kayit" className="landing-outlineLightButton">
+                  Salon Kaydı
+                </Link>
+              </div>
+
+              <div className="landing-heroTags">
+                {[
+                  "Online randevu",
+                  "SMS logları",
+                  "Boş saat kampanyası",
+                  "Salon paneli",
+                ].map((item) => (
+                  <span key={item} className="landing-heroTag">
+                    {item}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            <div className="landing-heroInfoCard">
+              <div className="landing-heroInfoTop">Başlangıç Paketi</div>
+              <div className="landing-heroInfoPrice">500 - 750 TL</div>
+              <p className="landing-heroInfoText">
+                Küçük ve orta ölçekli salonlar için hızlı kurulum, sade kullanım,
+                randevu akışı ve müşteri geri kazanım odaklı yapı.
+              </p>
+
+              <div className="landing-heroInfoList">
+                <div className="landing-heroInfoItem">
+                  • Online randevu sayfası
+                </div>
+                <div className="landing-heroInfoItem">
+                  • Hizmet ve saat yönetimi
+                </div>
+                <div className="landing-heroInfoItem">
+                  • SMS ve kampanya altyapısı
+                </div>
+                <div className="landing-heroInfoItem">• Salon paneli</div>
+              </div>
+
+              <a
+                href="https://wa.me/905000000000"
+                target="_blank"
+                rel="noreferrer"
+                className="landing-whatsAppButton"
               >
-                {item}
-              </span>
-            ))}
+                WhatsApp ile Demo İste
+              </a>
+            </div>
           </div>
         </section>
 
-        <section style={{ marginTop: 28 }}>
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(3, minmax(0, 1fr))",
-              gap: 16,
-            }}
-          >
+        <section id="ozellikler" className="landing-sectionSpace">
+          <div className="landing-sectionHead">
+            <h2 className="landing-sectionTitle">Öne çıkan özellikler</h2>
+            <p className="landing-sectionSubtitle">
+              Salon sahibinin işini kolaylaştıran, müşterinin ise hızlıca
+              randevu alabildiği bir yapı.
+            </p>
+          </div>
+
+          <div className="landing-gridThree">
             <FeatureCard
               title="Müşteri için kolay rezervasyon"
               text="Salon linkini açan müşteri, hizmet seçip uygun saatleri görür ve dakikalar içinde randevu oluşturur."
             />
             <FeatureCard
               title="Salon sahibi için tek ekran yönetim"
-              text="Yaklaşan randevular, bugünün planı, çalışma saatleri, hizmetler ve SMS hareketleri tek panelde toplanır."
+              text="Yaklaşan randevular, bugünün planı, çalışma saatleri, hizmetler ve kampanyalar tek panelde toplanır."
             />
             <FeatureCard
-              title="Boş saatleri satış fırsatına çevir"
+              title="Boş saatleri fırsata çevir"
               text="İzin veren müşterilere boş saat kampanyası veya geri kazanım mesajı göndererek doluluğu artır."
             />
           </div>
         </section>
 
-        <section style={{ marginTop: 28 }}>
-          <div
-            style={{
-              background: "#ffffff",
-              border: "1px solid #e5e7eb",
-              borderRadius: 30,
-              padding: 28,
-              boxShadow: "0 8px 24px rgba(0,0,0,0.05)",
-            }}
-          >
-            <h2
-              style={{
-                margin: 0,
-                fontSize: 36,
-                fontWeight: 900,
-                color: "#111827",
-              }}
-            >
-              Nasıl çalışır?
-            </h2>
+        <section id="nasil-calisir" className="landing-sectionSpace">
+          <div className="landing-whiteSection">
+            <div className="landing-sectionHead">
+              <h2 className="landing-sectionTitle">Nasıl çalışır?</h2>
+              <p className="landing-sectionSubtitle">
+                Kurulum basit, kullanım daha da basit.
+              </p>
+            </div>
 
-            <p
-              style={{
-                marginTop: 10,
-                color: "#6b7280",
-                fontSize: 15,
-              }}
-            >
-              Kurulum basit, kullanım daha da basit.
-            </p>
-
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(3, minmax(0, 1fr))",
-                gap: 16,
-                marginTop: 18,
-              }}
-            >
+            <div className="landing-gridThree">
               <StepCard
                 step="1. ADIM"
                 title="Salon bilgilerini ayarla"
@@ -372,243 +211,85 @@ export default function HomePage() {
               <StepCard
                 step="3. ADIM"
                 title="Randevuları ve kampanyaları yönet"
-                text="Randevu akışını takip et, SMS hatırlatma ve boş saat kampanyalarıyla verimini artır."
+                text="Randevu akışını takip et, hatırlatma ve kampanya süreçleriyle verimini artır."
               />
             </div>
           </div>
         </section>
 
-        <section style={{ marginTop: 28 }}>
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "1.2fr 0.8fr",
-              gap: 16,
-            }}
-          >
-            <div
-              style={{
-                background: "#ffffff",
-                border: "1px solid #e5e7eb",
-                borderRadius: 30,
-                padding: 28,
-                boxShadow: "0 8px 24px rgba(0,0,0,0.05)",
-              }}
-            >
-              <h2
-                style={{
-                  margin: 0,
-                  fontSize: 34,
-                  fontWeight: 900,
-                  color: "#111827",
-                }}
-              >
-                Kimler için uygun?
-              </h2>
+        <section className="landing-sectionSpace">
+          <div className="landing-gridTwoWide">
+            <div className="landing-whiteSection">
+              <h2 className="landing-sectionTitle">Kimler için uygun?</h2>
 
-              <div
-                style={{
-                  display: "grid",
-                  gap: 12,
-                  marginTop: 18,
-                }}
-              >
+              <div className="landing-stackList">
                 {[
                   "Güzellik salonları",
                   "Kuaförler",
                   "Cilt bakım merkezleri",
                   "Kirpik ve kaş hizmeti veren işletmeler",
-                  "Butik, yerel ve hızlı yönetim isteyen salonlar",
+                  "Butik ve yerel salonlar",
                 ].map((item) => (
-                  <div
-                    key={item}
-                    style={{
-                      background: "#f9fafb",
-                      border: "1px solid #e5e7eb",
-                      borderRadius: 18,
-                      padding: 16,
-                      color: "#374151",
-                      fontSize: 15,
-                      fontWeight: 600,
-                    }}
-                  >
+                  <div key={item} className="landing-listItem">
                     {item}
                   </div>
                 ))}
               </div>
             </div>
 
-            <div
-              style={{
-                background: "#ffffff",
-                border: "1px solid #e5e7eb",
-                borderRadius: 30,
-                padding: 28,
-                boxShadow: "0 8px 24px rgba(0,0,0,0.05)",
-              }}
-            >
-              <h2
-                style={{
-                  margin: 0,
-                  fontSize: 34,
-                  fontWeight: 900,
-                  color: "#111827",
-                }}
-              >
-                Baslangic paketi
-              </h2>
+            <div id="fiyat" className="landing-whiteSection">
+              <h2 className="landing-sectionTitle">Başlangıç paketi</h2>
 
-              <div
-                style={{
-                  marginTop: 18,
-                  background: "#f9fafb",
-                  border: "1px solid #e5e7eb",
-                  borderRadius: 22,
-                  padding: 20,
-                }}
-              >
-                <div
-                  style={{
-                    fontSize: 14,
-                    color: "#6b7280",
-                    fontWeight: 700,
-                    textTransform: "uppercase",
-                    letterSpacing: 0.8,
-                  }}
-                >
-                  Aylik
-                </div>
-
-                <div
-                  style={{
-                    marginTop: 8,
-                    fontSize: 44,
-                    fontWeight: 900,
-                    color: "#111827",
-                  }}
-                >
-                  500 - 750 TL
-                </div>
-
-                <div
-                  style={{
-                    marginTop: 10,
-                    color: "#4b5563",
-                    lineHeight: 1.7,
-                    fontSize: 15,
-                  }}
-                >
+              <div className="landing-pricingBox">
+                <div className="landing-pricingLabel">Aylık</div>
+                <div className="landing-pricingPrice">500 - 750 TL</div>
+                <div className="landing-pricingText">
                   Online randevu sayfası, salon paneli, SMS altyapısı ve kampanya
                   yönetimi ile sade bir başlangıç paketi.
                 </div>
               </div>
 
               <Link
-                href="/giris"
-                style={{
-                  marginTop: 18,
-                  display: "inline-block",
-                  textDecoration: "none",
-                  background: "#111827",
-                  color: "#ffffff",
-                  padding: "14px 18px",
-                  borderRadius: 18,
-                  fontWeight: 800,
-                  fontSize: 15,
-                }}
+                href="/kayit"
+                className="landing-darkButton landing-marginTop18"
               >
-                Salon Paneline Gir
+                Salonunu Oluştur
               </Link>
             </div>
           </div>
         </section>
 
-        <section style={{ marginTop: 28 }}>
-          <div
-            style={{
-              background:
-                "linear-gradient(135deg, #111827 0%, #1f2937 100%)",
-              borderRadius: 30,
-              padding: 30,
-              color: "#ffffff",
-              boxShadow: "0 12px 30px rgba(0,0,0,0.12)",
-            }}
-          >
-            <h2
-              style={{
-                margin: 0,
-                fontSize: 38,
-                fontWeight: 900,
-              }}
-            >
-              Salonunu dijitale taşı
-            </h2>
+        <section className="landing-sectionSpace">
+          <div className="landing-darkCtaSection">
+            <div className="landing-darkLogoRow">
+              <Logo dark={false} />
+            </div>
 
-            <p
-              style={{
-                marginTop: 14,
-                marginBottom: 0,
-                maxWidth: 760,
-                color: "rgba(255,255,255,0.84)",
-                fontSize: 16,
-                lineHeight: 1.7,
-              }}
-            >
+            <h2 className="landing-darkCtaTitle">Salonunu dijitale taşı</h2>
+
+            <p className="landing-darkCtaText">
               Daha az telefon trafiği, daha düzenli randevu akışı, daha güçlü
               müşteri geri dönüşü. Beypazarı’ndan başlayıp büyüyen salonlar için
               sade ve güçlü bir sistem.
             </p>
 
-            <div
-              style={{
-                display: "flex",
-                gap: 14,
-                flexWrap: "wrap",
-                marginTop: 22,
-              }}
-            >
+            <div className="landing-heroActions">
               <Link
                 href="/salon/nurseda-guzellik-salonu"
-                style={{
-                  textDecoration: "none",
-                  background: "#ffffff",
-                  color: "#111827",
-                  padding: "14px 18px",
-                  borderRadius: 18,
-                  fontWeight: 800,
-                  fontSize: 15,
-                }}
+                className="landing-lightButton"
               >
-                Demo Sayfayi Goster
+                Demo Sayfayı Göster
               </Link>
 
-              <Link
-                href="/giris"
-                style={{
-                  textDecoration: "none",
-                  background: "rgba(255,255,255,0.08)",
-                  color: "#ffffff",
-                  padding: "14px 18px",
-                  borderRadius: 18,
-                  fontWeight: 800,
-                  fontSize: 15,
-                  border: "1px solid rgba(255,255,255,0.14)",
-                }}
-              >
-                Hemen Basla
+              <Link href="/kayit" className="landing-outlineLightButton">
+                Hemen Başla
               </Link>
             </div>
           </div>
         </section>
 
-        <section style={{ marginTop: 28 }}>
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "1fr 1fr 1fr",
-              gap: 16,
-            }}
-          >
+        <section id="iletisim" className="landing-sectionSpace">
+          <div className="landing-gridThree">
             <ContactCard
               title="WhatsApp"
               value="+90 500 000 00 00"
@@ -622,52 +303,23 @@ export default function HomePage() {
             />
 
             <ContactCard
-              title="Hizmet Bolgesi"
+              title="Hizmet Bölgesi"
               value="Beypazarı"
               text="İlk aşamada Beypazarı odaklı başlıyoruz. Sonrasında farklı ilçe ve şehirlere açılabilir."
             />
           </div>
         </section>
 
-        <section style={{ marginTop: 28 }}>
-          <div
-            style={{
-              background: "#ffffff",
-              border: "1px solid #e5e7eb",
-              borderRadius: 30,
-              padding: 28,
-              boxShadow: "0 8px 24px rgba(0,0,0,0.05)",
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              gap: 20,
-              flexWrap: "wrap",
-            }}
-          >
+        <section className="landing-sectionSpace">
+          <div className="landing-demoStrip">
             <div>
-              <h2
-                style={{
-                  margin: 0,
-                  fontSize: 34,
-                  fontWeight: 900,
-                  color: "#111827",
-                }}
-              >
+              <h2 className="landing-sectionTitle landing-noMarginBottom">
                 Hemen demo iste
               </h2>
 
-              <p
-                style={{
-                  marginTop: 10,
-                  marginBottom: 0,
-                  color: "#6b7280",
-                  fontSize: 15,
-                  lineHeight: 1.7,
-                  maxWidth: 760,
-                }}
-              >
+              <p className="landing-sectionSubtitle landing-demoSubtitle">
                 Salonuna özel kurulum, randevu sayfası ve panel yapısını birlikte
-                gösterebiliriz. İstersen WhatsApp’tan yaz, sistemi canlı anlatayım.
+                gösterebiliriz. İstersen WhatsApp’tan yaz, sistemi canlı anlatalım.
               </p>
             </div>
 
@@ -675,129 +327,39 @@ export default function HomePage() {
               href="https://wa.me/905000000000"
               target="_blank"
               rel="noreferrer"
-              style={{
-                textDecoration: "none",
-                background: "#25D366",
-                color: "#ffffff",
-                padding: "16px 22px",
-                borderRadius: 18,
-                fontWeight: 900,
-                fontSize: 15,
-                whiteSpace: "nowrap",
-              }}
+              className="landing-whatsAppButton"
             >
-              WhatsApp ile Iletisime Gec
+              WhatsApp ile İletişime Geç
             </a>
           </div>
         </section>
 
-        <footer
-          style={{
-            marginTop: 28,
-            background: "#111827",
-            color: "#ffffff",
-            borderRadius: 28,
-            padding: 28,
-          }}
-        >
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              gap: 20,
-              flexWrap: "wrap",
-              alignItems: "center",
-            }}
-          >
+        <footer className="landing-footer">
+          <div className="landing-footerTop">
             <div>
-              <div
-                style={{
-                  fontSize: 22,
-                  fontWeight: 900,
-                }}
-              >
-                Beypazarı Randevu Sistemi
-              </div>
+              <Logo dark={false} />
 
-              <p
-                style={{
-                  marginTop: 10,
-                  marginBottom: 0,
-                  color: "rgba(255,255,255,0.72)",
-                  fontSize: 14,
-                  lineHeight: 1.7,
-                  maxWidth: 620,
-                }}
-              >
+              <p className="landing-footerText">
                 Güzellik salonları ve kuaförler için sade, modern ve sonuç odaklı
                 online randevu çözümü.
               </p>
             </div>
 
-            <div
-              style={{
-                display: "flex",
-                gap: 12,
-                flexWrap: "wrap",
-              }}
-            >
-              <Link
-                href="/"
-                style={{
-                  textDecoration: "none",
-                  color: "#ffffff",
-                  padding: "10px 14px",
-                  borderRadius: 14,
-                  background: "rgba(255,255,255,0.08)",
-                  fontWeight: 700,
-                  fontSize: 14,
-                }}
-              >
+            <div className="landing-footerLinks">
+              <Link href="/" className="landing-footerLink">
                 Ana Sayfa
               </Link>
-
-              <Link
-                href="/giris"
-                style={{
-                  textDecoration: "none",
-                  color: "#ffffff",
-                  padding: "10px 14px",
-                  borderRadius: 14,
-                  background: "rgba(255,255,255,0.08)",
-                  fontWeight: 700,
-                  fontSize: 14,
-                }}
-              >
-                Salon Girisi
+              <Link href="/giris" className="landing-footerLink">
+                Salon Girişi
               </Link>
-
-              <Link
-                href="/salon/nurseda-guzellik-salonu"
-                style={{
-                  textDecoration: "none",
-                  color: "#ffffff",
-                  padding: "10px 14px",
-                  borderRadius: 14,
-                  background: "rgba(255,255,255,0.08)",
-                  fontWeight: 700,
-                  fontSize: 14,
-                }}
-              >
-                Demo
+              <Link href="/kayit" className="landing-footerLink">
+                Salon Kaydı
               </Link>
             </div>
           </div>
 
-          <div
-            style={{
-              marginTop: 20,
-              paddingTop: 18,
-              borderTop: "1px solid rgba(255,255,255,0.12)",
-              color: "rgba(255,255,255,0.62)",
-              fontSize: 13,
-            }}
-          >
-            © 2026 Beypazarı Randevu Sistemi. Tüm hakları saklıdır.
+          <div className="landing-footerBottom">
+            © 2026 Beypazari Randevu. Tüm hakları saklıdır.
           </div>
         </footer>
       </div>
