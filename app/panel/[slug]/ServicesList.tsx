@@ -2,10 +2,19 @@
 
 import { createClient } from "@/lib/supabase/client";
 import { useRouter } from "next/navigation";
+import { useMemo } from "react";
 
-export default function ServicesList({ services }: { services: any[] }) {
+export default function ServicesList({ services: servicesJson }: { services: string }) {
   const supabase = createClient();
   const router = useRouter();
+
+  const services = useMemo(() => {
+    try {
+      return JSON.parse(servicesJson) as any[];
+    } catch {
+      return [];
+    }
+  }, [servicesJson]);
 
   async function deleteService(id: string) {
     const confirmDelete = confirm("Bu hizmeti silmek istiyor musunuz?");

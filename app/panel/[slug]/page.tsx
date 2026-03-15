@@ -1053,7 +1053,7 @@ export default async function PanelSlugPage({ params }: PageProps) {
             </SectionCard>
 
             <SectionCard title="Hizmetleri Yonet">
-              <ServicesList services={services || []} />
+              <ServicesList services={JSON.stringify(services || [])} />
             </SectionCard>
 
             <SectionCard
@@ -1062,7 +1062,7 @@ export default async function PanelSlugPage({ params }: PageProps) {
             >
               <WorkingHoursForm
                 salonId={salon.id}
-                workingHours={workingHours || []}
+                workingHours={JSON.stringify(workingHours || [])}
               />
             </SectionCard>
           </div>

@@ -15,7 +15,7 @@ type WorkingHour = {
 
 type WorkingHoursFormProps = {
   salonId: string;
-  workingHours: WorkingHour[];
+  workingHours: string; // JSON string
 };
 
 const dayNames = [
@@ -30,16 +30,24 @@ const dayNames = [
 
 export default function WorkingHoursForm({
   salonId,
-  workingHours,
+  workingHours: workingHoursJson,
 }: WorkingHoursFormProps) {
   const router = useRouter();
   const supabase = createClient();
   const [isPending, startTransition] = useTransition();
   const [message, setMessage] = useState("");
 
+  const parsedWorkingHours = useMemo(() => {
+    try {
+      return JSON.parse(workingHoursJson) as WorkingHour[];
+    } catch {
+      return [];
+    }
+  }, [workingHoursJson]);
+
   const initialRows = useMemo(() => {
     return Array.from({ length: 7 }, (_, i) => {
-      const existing = workingHours.find((item) => item.day_of_week === i);
+      const existing = parsedWorkingHours.find((item) => item.day_of_week === i);
 
       return (
         existing || {
@@ -50,7 +58,7 @@ export default function WorkingHoursForm({
         }
       );
     });
-  }, [workingHours]);
+  }, [parsedWorkingHours]);
 
   const [rows, setRows] = useState<WorkingHour[]>(initialRows);
 
