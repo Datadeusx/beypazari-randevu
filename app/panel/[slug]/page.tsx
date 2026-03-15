@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 
 import CancelButton from "@/app/panel/CancelButton";
+import CompleteButton from "@/app/panel/CompleteButton";
 import LogoutButton from "@/app/panel/LogoutButton";
 import AddServiceForm from "@/app/panel/AddServiceForm";
 import WorkingHoursForm from "@/app/panel/WorkingHoursForm";
@@ -367,38 +368,58 @@ export default async function PanelSlugPage({ params }: PageProps) {
         padding: "24px 0 40px",
       }}
     >
-      <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 16px" }}>
+      <div style={{ maxWidth: 1400, margin: "0 auto", padding: "0 20px" }}>
         <section
           style={{
             overflow: "hidden",
-            borderRadius: 30,
+            borderRadius: 32,
             background:
-              "linear-gradient(135deg, #0f172a 0%, #1e293b 55%, #334155 100%)",
+              "linear-gradient(135deg, #1a1d29 0%, #24273a 60%, #2e3247 100%)",
             color: "#ffffff",
-            padding: 32,
-            boxShadow: "0 12px 30px rgba(0,0,0,0.12)",
-            marginBottom: 24,
+            padding: 40,
+            boxShadow: "0 25px 50px rgba(0,0,0,0.25)",
+            marginBottom: 32,
+            position: "relative",
           }}
         >
           <div
             style={{
+              content: '',
+              position: "absolute",
+              top: 0,
+              right: 0,
+              bottom: 0,
+              left: 0,
+              background:
+                "radial-gradient(circle at 80% 20%, rgba(251, 191, 36, 0.12) 0%, transparent 60%)",
+              pointerEvents: "none",
+            }}
+          />
+          <div
+            style={{
               display: "flex",
-              gap: 20,
+              gap: 24,
               justifyContent: "space-between",
               alignItems: "flex-start",
               flexWrap: "wrap",
+              position: "relative",
+              zIndex: 1,
             }}
           >
             <div>
               <div
                 style={{
                   display: "inline-block",
-                  padding: "8px 14px",
-                  borderRadius: 999,
-                  background: "rgba(255,255,255,0.12)",
-                  fontSize: 12,
-                  fontWeight: 700,
-                  marginBottom: 14,
+                  padding: "10px 18px",
+                  borderRadius: 9999,
+                  background: "rgba(251, 191, 36, 0.15)",
+                  border: "1px solid rgba(251, 191, 36, 0.3)",
+                  fontSize: 13,
+                  fontWeight: 800,
+                  marginBottom: 18,
+                  letterSpacing: 0.5,
+                  textTransform: "uppercase",
+                  color: "#fbbf24",
                 }}
               >
                 Salon Paneli
@@ -407,9 +428,9 @@ export default async function PanelSlugPage({ params }: PageProps) {
               <h1
                 style={{
                   margin: 0,
-                  fontSize: 42,
-                  fontWeight: 800,
-                  letterSpacing: -0.5,
+                  fontSize: 48,
+                  fontWeight: 900,
+                  letterSpacing: -1.5,
                 }}
               >
                 {salon.name}
@@ -455,6 +476,22 @@ export default async function PanelSlugPage({ params }: PageProps) {
                 Randevu Sayfasini Ac
               </Link>
 
+              <Link
+                href={`/panel/${slug}/reviews`}
+                style={{
+                  textDecoration: "none",
+                  border: "1px solid rgba(251,191,36,0.3)",
+                  background: "rgba(251,191,36,0.15)",
+                  color: "#fbbf24",
+                  borderRadius: 16,
+                  padding: "12px 16px",
+                  fontWeight: 700,
+                  fontSize: 14,
+                }}
+              >
+                Degerlendirmeler
+              </Link>
+
               <LogoutButton />
             </div>
           </div>
@@ -464,43 +501,72 @@ export default async function PanelSlugPage({ params }: PageProps) {
           style={{
             display: "grid",
             gridTemplateColumns: "repeat(4, minmax(0, 1fr))",
-            gap: 16,
-            marginBottom: 24,
+            gap: 20,
+            marginBottom: 32,
           }}
         >
           {[
             {
               label: "Yaklasan Randevular",
               value: upcomingAppointments?.length ?? 0,
+              icon: "📅",
             },
             {
               label: "Bugunun Randevulari",
               value: todaysAppointments?.length ?? 0,
+              icon: "⏰",
             },
             {
               label: "Toplam Hizmet",
               value: services?.length ?? 0,
+              icon: "✨",
             },
             {
               label: "SMS Log Sayisi",
               value: smsLogs?.length ?? 0,
+              icon: "📱",
             },
-          ].map((item) => (
+          ].map((item, index) => (
             <div
               key={item.label}
               style={{
                 background: "#ffffff",
-                border: "1px solid #e5e7eb",
+                border: "1px solid #e2e8f0",
                 borderRadius: 24,
-                padding: 22,
-                boxShadow: "0 8px 24px rgba(0,0,0,0.05)",
+                padding: 28,
+                boxShadow: "0 10px 15px -3px rgba(0,0,0,0.1)",
+                transition: "all 0.3s ease",
+                cursor: "pointer",
+                position: "relative",
+                overflow: "hidden",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = "translateY(-6px)";
+                e.currentTarget.style.boxShadow =
+                  "0 25px 50px -12px rgba(0,0,0,0.25)";
+                e.currentTarget.style.borderColor = "#fbbf24";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = "translateY(0)";
+                e.currentTarget.style.boxShadow =
+                  "0 10px 15px -3px rgba(0,0,0,0.1)";
+                e.currentTarget.style.borderColor = "#e2e8f0";
               }}
             >
               <div
                 style={{
+                  fontSize: 32,
+                  marginBottom: 16,
+                  opacity: 0.8,
+                }}
+              >
+                {item.icon}
+              </div>
+              <div
+                style={{
                   fontSize: 13,
                   fontWeight: 700,
-                  color: "#6b7280",
+                  color: "#64748b",
                   textTransform: "uppercase",
                   letterSpacing: 0.8,
                 }}
@@ -510,10 +576,12 @@ export default async function PanelSlugPage({ params }: PageProps) {
 
               <div
                 style={{
-                  marginTop: 10,
-                  fontSize: 36,
-                  fontWeight: 800,
-                  color: "#111827",
+                  marginTop: 12,
+                  fontSize: 44,
+                  fontWeight: 900,
+                  color: "#1a1d29",
+                  letterSpacing: -1,
+                  lineHeight: 1,
                 }}
               >
                 {item.value}
@@ -728,6 +796,12 @@ export default async function PanelSlugPage({ params }: PageProps) {
                           >
                             {appointment.status || "active"}
                           </span>
+
+                          <CompleteButton
+                            appointmentId={appointment.id}
+                            salonId={salon.id}
+                            status={appointment.status}
+                          />
 
                           <CancelButton appointmentId={appointment.id} />
                         </div>

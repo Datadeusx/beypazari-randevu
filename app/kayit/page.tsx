@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useMemo, useState } from "react";
-import { createClient } from "@/lib/supabase/client";
+import { registerSalon } from "./actions";
 
 function toSlug(text: string) {
   return text
@@ -35,84 +35,20 @@ export default function RegisterPage() {
     setLoading(true);
     setMessage("");
 
-    const trimmedSalonName = salonName.trim();
-    const trimmedPhone = phone.trim();
-    const trimmedEmail = email.trim();
-
-    if (!trimmedSalonName || !trimmedPhone || !trimmedEmail || !password) {
-      setMessage("Lütfen tüm alanları doldurun.");
-      setLoading(false);
-      return;
-    }
-
-    let baseSlug = toSlug(trimmedSalonName);
-
-    if (!baseSlug) {
-      setMessage("Geçerli bir salon adı girin.");
-      setLoading(false);
-      return;
-    }
-
-    const supabase = createClient();
-
-    const { data: existingSlugs, error: slugError } = await supabase
-      .from("salons")
-      .select("slug")
-      .like("slug", `${baseSlug}%`);
-
-    if (slugError) {
-      setMessage("Slug kontrol hatası: " + slugError.message);
-      setLoading(false);
-      return;
-    }
-
-    let finalSlug = baseSlug;
-
-    if (existingSlugs && existingSlugs.length > 0) {
-      const usedSlugs = new Set(existingSlugs.map((item) => item.slug));
-
-      if (usedSlugs.has(baseSlug)) {
-        let counter = 2;
-        while (usedSlugs.has(`${baseSlug}-${counter}`)) {
-          counter += 1;
-        }
-        finalSlug = `${baseSlug}-${counter}`;
-      }
-    }
-
-    const { data: authData, error: authError } = await supabase.auth.signUp({
-      email: trimmedEmail,
+    const result = await registerSalon({
+      salonName,
+      phone,
+      email,
       password,
     });
 
-    if (authError) {
-      setMessage("Kayıt hatası: " + authError.message);
+    if (!result.success) {
+      setMessage(result.error || "Bir hata oluştu");
       setLoading(false);
       return;
     }
 
-    const user = authData.user;
-
-    if (!user) {
-      setMessage("Kullanıcı oluşturulamadı.");
-      setLoading(false);
-      return;
-    }
-
-    const { error: salonError } = await supabase.from("salons").insert({
-      name: trimmedSalonName,
-      slug: finalSlug,
-      phone: trimmedPhone,
-      user_id: user.id,
-    });
-
-    if (salonError) {
-      setMessage("Salon oluşturma hatası: " + salonError.message);
-      setLoading(false);
-      return;
-    }
-
-    window.location.href = `/panel/${finalSlug}`;
+    window.location.href = `/panel/${result.slug}`;
   }
 
   return (

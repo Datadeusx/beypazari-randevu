@@ -11,10 +11,12 @@ export default function Logo({
   dark = true,
   withText = true,
 }: LogoProps) {
-  const bgColor = dark ? "#111827" : "#ffffff";
-  const textColor = dark ? "#111827" : "#ffffff";
-  const badgeTextColor = dark ? "#ffffff" : "#111827";
-  const subTextColor = dark ? "#6b7280" : "rgba(255,255,255,0.72)";
+  const bgColor = dark
+    ? "linear-gradient(135deg, #1a1d29 0%, #2e3247 100%)"
+    : "linear-gradient(135deg, #ffffff 0%, #f8fafc 100%)";
+  const textColor = dark ? "#1a1d29" : "#ffffff";
+  const badgeTextColor = dark ? "#ffffff" : "#1a1d29";
+  const subTextColor = dark ? "#64748b" : "rgba(255,255,255,0.75)";
 
   return (
     <Link
@@ -28,17 +30,18 @@ export default function Logo({
     >
       <div
         style={{
-          width: 40,
-          height: 40,
-          borderRadius: 12,
+          width: 48,
+          height: 48,
+          borderRadius: 16,
           background: bgColor,
           color: badgeTextColor,
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
           fontWeight: 900,
-          fontSize: 16,
+          fontSize: 18,
           flexShrink: 0,
+          boxShadow: "0 10px 25px rgba(26, 29, 41, 0.25)",
         }}
       >
         BR
@@ -51,6 +54,7 @@ export default function Logo({
               fontSize: 18,
               fontWeight: 900,
               color: textColor,
+              letterSpacing: -0.3,
             }}
           >
             Beypazari Randevu
@@ -60,6 +64,8 @@ export default function Logo({
             style={{
               fontSize: 12,
               color: subTextColor,
+              marginTop: 4,
+              fontWeight: 600,
             }}
           >
             Salonlar için online randevu sistemi

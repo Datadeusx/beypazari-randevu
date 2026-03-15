@@ -4,12 +4,15 @@ import Logo from "@/components/Logo";
 function FeatureCard({
   title,
   text,
+  icon,
 }: {
   title: string;
   text: string;
+  icon: string;
 }) {
   return (
     <div className="landing-card">
+      <div className="landing-cardIcon">{icon}</div>
       <h3 className="landing-cardTitle">{title}</h3>
       <p className="landing-cardText">{text}</p>
     </div>
@@ -128,6 +131,21 @@ export default function HomePage() {
                   </span>
                 ))}
               </div>
+
+              <div className="landing-statsGrid">
+                <div className="landing-statItem">
+                  <div className="landing-statNumber">50+</div>
+                  <div className="landing-statLabel">Aktif Salon</div>
+                </div>
+                <div className="landing-statItem">
+                  <div className="landing-statNumber">2500+</div>
+                  <div className="landing-statLabel">Tamamlanan Randevu</div>
+                </div>
+                <div className="landing-statItem">
+                  <div className="landing-statNumber">97%</div>
+                  <div className="landing-statLabel">Müşteri Memnuniyeti</div>
+                </div>
+              </div>
             </div>
 
             <div className="landing-heroInfoCard">
@@ -174,14 +192,17 @@ export default function HomePage() {
 
           <div className="landing-gridThree">
             <FeatureCard
+              icon="📅"
               title="Müşteri için kolay rezervasyon"
               text="Salon linkini açan müşteri, hizmet seçip uygun saatleri görür ve dakikalar içinde randevu oluşturur."
             />
             <FeatureCard
+              icon="⚡"
               title="Salon sahibi için tek ekran yönetim"
               text="Yaklaşan randevular, bugünün planı, çalışma saatleri, hizmetler ve kampanyalar tek panelde toplanır."
             />
             <FeatureCard
+              icon="🎯"
               title="Boş saatleri fırsata çevir"
               text="İzin veren müşterilere boş saat kampanyası veya geri kazanım mesajı göndererek doluluğu artır."
             />

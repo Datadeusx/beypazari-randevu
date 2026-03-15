@@ -2,6 +2,7 @@
 
 import { use, useEffect, useMemo, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
+import ReviewSection from "@/components/ReviewSection";
 
 type PageProps = {
   params: Promise<{
@@ -431,30 +432,57 @@ export default function SalonBookingPage({ params }: PageProps) {
             overflow: "hidden",
             borderRadius: 28,
             background:
-              "linear-gradient(135deg, #111827 0%, #1f2937 60%, #374151 100%)",
+              "linear-gradient(135deg, #1a1d29 0%, #24273a 60%, #2e3247 100%)",
             color: "#ffffff",
-            padding: 32,
-            boxShadow: "0 10px 30px rgba(0,0,0,0.12)",
-            marginBottom: 24,
+            padding: 40,
+            boxShadow: "0 25px 50px rgba(0,0,0,0.25)",
+            marginBottom: 32,
+            position: "relative",
           }}
         >
           <div
             style={{
-              display: "inline-block",
-              padding: "8px 14px",
-              borderRadius: 999,
-              background: "rgba(255,255,255,0.12)",
-              fontSize: 12,
-              fontWeight: 600,
-              marginBottom: 16,
+              content: '',
+              position: "absolute",
+              top: 0,
+              right: 0,
+              bottom: 0,
+              left: 0,
+              background:
+                "radial-gradient(circle at 20% 50%, rgba(245, 158, 11, 0.15) 0%, transparent 50%)",
+              pointerEvents: "none",
             }}
-          >
-            Online Randevu
-          </div>
+          />
 
-          <h1 style={{ margin: 0, fontSize: 40, fontWeight: 800 }}>
-            {salon.name}
-          </h1>
+          <div style={{ position: "relative", zIndex: 1 }}>
+            <div
+              style={{
+                display: "inline-block",
+                padding: "10px 18px",
+                borderRadius: 9999,
+                background: "rgba(251, 191, 36, 0.15)",
+                border: "1px solid rgba(251, 191, 36, 0.3)",
+                fontSize: 13,
+                fontWeight: 800,
+                marginBottom: 20,
+                letterSpacing: 0.5,
+                textTransform: "uppercase",
+                color: "#fbbf24",
+              }}
+            >
+              Online Randevu
+            </div>
+
+            <h1
+              style={{
+                margin: 0,
+                fontSize: 44,
+                fontWeight: 900,
+                letterSpacing: -1,
+              }}
+            >
+              {salon.name}
+            </h1>
 
           <p
             style={{
@@ -469,30 +497,36 @@ export default function SalonBookingPage({ params }: PageProps) {
             randevunuzu saniyeler içinde oluşturun.
           </p>
 
-          <div
-            style={{
-              display: "flex",
-              flexWrap: "wrap",
-              gap: 10,
-              marginTop: 20,
-            }}
-          >
-            {["Hızlı rezervasyon", "Kolay saat seçimi", "SMS hatırlatma"].map(
-              (item) => (
+            <div
+              style={{
+                display: "flex",
+                flexWrap: "wrap",
+                gap: 12,
+                marginTop: 24,
+              }}
+            >
+              {[
+                "Hızlı rezervasyon",
+                "Kolay saat seçimi",
+                "SMS hatırlatma",
+              ].map((item) => (
                 <span
                   key={item}
                   style={{
-                    border: "1px solid rgba(255,255,255,0.15)",
-                    padding: "8px 14px",
-                    borderRadius: 999,
-                    color: "rgba(255,255,255,0.9)",
-                    fontSize: 14,
+                    border: "1px solid rgba(255,255,255,0.2)",
+                    padding: "10px 18px",
+                    borderRadius: 9999,
+                    color: "rgba(255,255,255,0.95)",
+                    fontSize: 15,
+                    fontWeight: 600,
+                    background: "rgba(255,255,255,0.05)",
+                    backdropFilter: "blur(10px)",
                   }}
                 >
                   {item}
                 </span>
-              )
-            )}
+              ))}
+            </div>
           </div>
         </section>
 
@@ -588,13 +622,19 @@ export default function SalonBookingPage({ params }: PageProps) {
                         style={{
                           borderRadius: 20,
                           border: active
-                            ? "1px solid #111827"
-                            : "1px solid #e5e7eb",
-                          background: active ? "#111827" : "#ffffff",
-                          color: active ? "#ffffff" : "#111827",
-                          padding: 16,
+                            ? "2px solid #1a1d29"
+                            : "1px solid #e2e8f0",
+                          background: active
+                            ? "linear-gradient(135deg, #1a1d29 0%, #24273a 100%)"
+                            : "#ffffff",
+                          color: active ? "#ffffff" : "#1a1d29",
+                          padding: 20,
                           textAlign: "left",
                           cursor: "pointer",
+                          transition: "all 0.2s ease",
+                          boxShadow: active
+                            ? "0 8px 20px rgba(26, 29, 41, 0.25)"
+                            : "0 4px 6px rgba(0, 0, 0, 0.1)",
                         }}
                       >
                         <div
@@ -768,14 +808,18 @@ export default function SalonBookingPage({ params }: PageProps) {
                           style={{
                             borderRadius: 16,
                             border: active
-                              ? "1px solid #111827"
-                              : "1px solid #e5e7eb",
-                            background: active ? "#111827" : "#ffffff",
-                            color: active ? "#ffffff" : "#111827",
-                            padding: "12px 10px",
-                            fontSize: 14,
+                              ? "2px solid #1a1d29"
+                              : "1px solid #e2e8f0",
+                            background: active ? "#1a1d29" : "#ffffff",
+                            color: active ? "#ffffff" : "#1a1d29",
+                            padding: "14px 12px",
+                            fontSize: 15,
                             fontWeight: 700,
                             cursor: "pointer",
+                            transition: "all 0.2s ease",
+                            boxShadow: active
+                              ? "0 4px 12px rgba(26, 29, 41, 0.2)"
+                              : "none",
                           }}
                         >
                           {slot}
@@ -908,13 +952,31 @@ export default function SalonBookingPage({ params }: PageProps) {
                 style={{
                   width: "100%",
                   border: "none",
-                  borderRadius: 18,
-                  background: "#111827",
+                  borderRadius: 20,
+                  background:
+                    "linear-gradient(135deg, #1a1d29 0%, #24273a 100%)",
                   color: "#ffffff",
-                  padding: "16px 18px",
-                  fontSize: 15,
-                  fontWeight: 700,
-                  cursor: "pointer",
+                  padding: "18px 24px",
+                  fontSize: 16,
+                  fontWeight: 800,
+                  cursor: submitting ? "not-allowed" : "pointer",
+                  transition: "all 0.2s ease",
+                  boxShadow: "0 8px 16px rgba(26, 29, 41, 0.3)",
+                  opacity: submitting ? 0.6 : 1,
+                }}
+                onMouseEnter={(e) => {
+                  if (!submitting) {
+                    e.currentTarget.style.boxShadow =
+                      "0 12px 24px rgba(26, 29, 41, 0.4)";
+                    e.currentTarget.style.transform = "translateY(-3px)";
+                  }
+                }}
+                onMouseLeave={(e) => {
+                  if (!submitting) {
+                    e.currentTarget.style.boxShadow =
+                      "0 8px 16px rgba(26, 29, 41, 0.3)";
+                    e.currentTarget.style.transform = "translateY(0)";
+                  }
                 }}
               >
                 {submitting ? "Randevu oluşturuluyor..." : "Randevuyu Onayla"}
@@ -1043,6 +1105,13 @@ export default function SalonBookingPage({ params }: PageProps) {
             </section>
           </aside>
         </div>
+
+        {/* Reviews Section */}
+        {salon && (
+          <div style={{ marginTop: 32 }}>
+            <ReviewSection salonId={salon.id} />
+          </div>
+        )}
       </div>
     </main>
   );

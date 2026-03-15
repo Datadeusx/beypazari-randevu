@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
+import { sendSMSWithRetry } from "@/lib/sms/send-with-retry";
+import { renderTemplate } from "@/lib/sms/templates";
 
 function pad(n: number) {
   return String(n).padStart(2, "0");
@@ -70,7 +72,7 @@ export async function GET(request: NextRequest) {
         customer_phone,
         status,
         services ( name ),
-        salons ( name )
+        salons ( id, name )
       `
       )
       .gte("appointment_time", startLocal)
@@ -89,8 +91,9 @@ export async function GET(request: NextRequest) {
     }
 
     const appointments = (data || []) as any[];
-    const reminders: any[] = [];
+    const results: any[] = [];
     let sentCount = 0;
+    let failedCount = 0;
 
     for (const appointment of appointments) {
       const service = Array.isArray(appointment.services)
@@ -102,47 +105,62 @@ export async function GET(request: NextRequest) {
         : appointment.salons;
 
       const phone = appointment.customer_phone?.trim();
-      if (!phone) continue;
+      if (!phone) {
+        results.push({
+          appointment_id: appointment.id,
+          status: 'skipped',
+          reason: 'No phone number',
+        });
+        continue;
+      }
 
+      const salonId = salon?.id;
       const salonName = salon?.name || "Salon";
       const serviceName = service?.name || "Hizmet";
 
-      const message = `${salonName} randevu hatirlatma: ${formatDateTR(
-        appointment.appointment_time
-      )} tarihinde saat ${formatTimeTR(
-        appointment.appointment_time
-      )} icin ${serviceName} randevunuz bulunmaktadir.`;
-
-      const { error: logError } = await supabase.from("sms_logs").insert({
-        appointment_id: appointment.id,
-        phone: phone,
-        message: message,
-        status: "sent",
+      // Use template system for consistent messaging
+      const message = renderTemplate('APPOINTMENT_REMINDER', {
+        salonName,
+        date: formatDateTR(appointment.appointment_time),
+        time: formatTimeTR(appointment.appointment_time),
+        service: serviceName,
       });
 
-      if (logError) {
-        return NextResponse.json(
-          {
-            success: false,
-            error: "sms_logs insert hatasi: " + logError.message,
-          },
-          { status: 500 }
-        );
+      // Send SMS with retry logic and quota checking
+      const smsResult = await sendSMSWithRetry(phone, message, {
+        appointmentId: appointment.id,
+        salonId,
+        maxRetries: 3,
+      });
+
+      if (smsResult.success) {
+        sentCount++;
+        results.push({
+          appointment_id: appointment.id,
+          phone,
+          status: 'sent',
+          message_id: smsResult.messageId,
+          attempts: smsResult.attempts,
+        });
+      } else {
+        failedCount++;
+        results.push({
+          appointment_id: appointment.id,
+          phone,
+          status: 'failed',
+          error: smsResult.error,
+          error_category: smsResult.errorCategory,
+          attempts: smsResult.attempts,
+        });
       }
-
-      reminders.push({
-        appointment_id: appointment.id,
-        phone,
-        message,
-      });
-
-      sentCount++;
     }
 
     return NextResponse.json({
       success: true,
+      total_appointments: appointments.length,
       sent_count: sentCount,
-      reminders,
+      failed_count: failedCount,
+      results,
     });
   } catch (err: any) {
     return NextResponse.json(
