@@ -96,7 +96,7 @@ export const TRIAL_DAYS = 14;
 export const BANK_TRANSFER_INFO = {
   bankName: 'Türkiye İş Bankası',
   accountHolder: 'Beypazarı Randevu SaaS',
-  iban: 'TR00 0000 0000 0000 0000 0000 00', // Replace with actual IBAN
+  iban: 'TR71 0004 6004 8288 8000 0701 13', // Replace with actual IBAN
   currency: 'TRY',
   description: 'Hesap numaranızı açıklama kısmına yazınız',
 };
