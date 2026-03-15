@@ -12,7 +12,7 @@ type InactiveCustomer = {
 
 type InactiveCustomersCampaignSectionProps = {
   salonId: string;
-  customers: InactiveCustomer[];
+  customers: string; // JSON string
 };
 
 function formatDateTime(value: string | null) {
@@ -27,11 +27,19 @@ function formatDateTime(value: string | null) {
 
 export default function InactiveCustomersCampaignSection({
   salonId,
-  customers,
+  customers: customersJson,
 }: InactiveCustomersCampaignSectionProps) {
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const [resultMessage, setResultMessage] = useState("");
+
+  const customers = useMemo(() => {
+    try {
+      return JSON.parse(customersJson) as InactiveCustomer[];
+    } catch {
+      return [];
+    }
+  }, [customersJson]);
 
   const defaultMessage = useMemo(() => {
     return "Sizi tekrar salonumuzda görmek isteriz. Size özel kampanya ve uygun randevu saatlerimiz için bizimle iletişime geçebilirsiniz.";

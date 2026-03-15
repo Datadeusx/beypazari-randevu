@@ -5,7 +5,7 @@ import { useMemo, useState } from "react";
 type CampaignSectionProps = {
   salonId: string;
   eligibleCustomerCount: number;
-  emptySlotsToday: string[];
+  emptySlotsToday: string; // JSON string
 };
 
 export default function CampaignSection({
@@ -17,15 +17,23 @@ export default function CampaignSection({
   const [loading, setLoading] = useState(false);
   const [resultMessage, setResultMessage] = useState("");
 
+  const parsedSlots = useMemo(() => {
+    try {
+      return JSON.parse(emptySlotsToday) as string[];
+    } catch {
+      return [];
+    }
+  }, [emptySlotsToday]);
+
   const defaultMessage = useMemo(() => {
-    if (!emptySlotsToday || emptySlotsToday.length === 0) {
+    if (!parsedSlots || parsedSlots.length === 0) {
       return "Bugün için uygun boş saatlerimiz bulunmaktadır. Detaylı bilgi ve randevu için bizimle iletişime geçebilirsiniz.";
     }
 
-    const slotsText = emptySlotsToday.join(", ");
+    const slotsText = parsedSlots.join(", ");
 
     return `Bugün için uygun boş saatlerimiz var: ${slotsText}. Randevu almak isterseniz bizimle iletişime geçebilirsiniz.`;
-  }, [emptySlotsToday]);
+  }, [parsedSlots]);
 
   async function handleSendCampaign() {
     setResultMessage("");

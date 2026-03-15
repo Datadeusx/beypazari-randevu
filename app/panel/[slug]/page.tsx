@@ -725,12 +725,12 @@ export default async function PanelSlugPage({ params }: PageProps) {
             <CampaignSection
               salonId={salon.id}
               eligibleCustomerCount={eligibleCustomerCount || 0}
-              emptySlotsToday={emptySlotsToday}
+              emptySlotsToday={JSON.stringify(emptySlotsToday)}
             />
 
             <InactiveCustomersCampaignSection
               salonId={salon.id}
-              customers={(inactiveCustomers || []) as any[]}
+              customers={JSON.stringify(inactiveCustomers || [])}
             />
 
             <SectionCard
