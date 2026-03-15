@@ -25,14 +25,32 @@ export default async function BillingPage({ params }: PageProps) {
   }
 
   // Get salon
-  const { data: salon } = await supabase
+  const { data: salon, error: salonError } = await supabase
     .from('salons')
-    .select('id, name, slug, user_id, phone')
+    .select('id, name, slug, user_id')
     .eq('slug', slug)
     .maybeSingle();
 
+  if (salonError) {
+    console.error('Salon query error:', salonError);
+  }
+
   if (!salon || salon.user_id !== user.id) {
     redirect('/panel');
+  }
+
+  // Get phone separately if exists
+  let salonPhone = '';
+  try {
+    const { data: salonWithPhone } = await supabase
+      .from('salons')
+      .select('phone')
+      .eq('id', salon.id)
+      .maybeSingle();
+    salonPhone = salonWithPhone?.phone || '';
+  } catch (e) {
+    // Phone column might not exist, use empty string
+    salonPhone = '';
   }
 
   // Get subscription with plan details
@@ -303,7 +321,7 @@ export default async function BillingPage({ params }: PageProps) {
                 planPrice={(subscription.subscription_plans as any)?.price_monthly || 800}
                 salonId={salon.id}
                 userEmail={user.email || ''}
-                userPhone={salon.phone || ''}
+                userPhone={salonPhone}
               />
             )}
           </section>
