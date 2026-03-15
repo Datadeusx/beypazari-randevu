@@ -2,8 +2,8 @@ import { createClient } from '@/lib/supabase/server';
 import { redirect } from 'next/navigation';
 import { getTrialInfo } from '@/lib/subscription/trial';
 import { getSubscriptionLimits } from '@/lib/subscription/check-limits';
-import { BANK_TRANSFER_INFO, formatPrice, getAllPlans } from '@/lib/subscription/plans';
-import BillingForm from './BillingForm';
+import { formatPrice, getAllPlans } from '@/lib/subscription/plans';
+import IyzicoPaymentForm from './IyzicoPaymentForm';
 
 interface PageProps {
   params: Promise<{
@@ -27,7 +27,7 @@ export default async function BillingPage({ params }: PageProps) {
   // Get salon
   const { data: salon } = await supabase
     .from('salons')
-    .select('id, name, slug, user_id')
+    .select('id, name, slug, user_id, phone')
     .eq('slug', slug)
     .single();
 
@@ -290,70 +290,20 @@ export default async function BillingPage({ params }: PageProps) {
               boxShadow: '0 4px 12px rgba(0,0,0,0.05)',
             }}
           >
-            <h2 style={{ margin: 0, fontSize: 24, fontWeight: 800, color: '#111827' }}>Ödeme Yap</h2>
-
-            <div
-              style={{
-                marginTop: 20,
-                background: '#f9fafb',
-                borderRadius: 16,
-                padding: 20,
-                border: '1px solid #e5e7eb',
-              }}
-            >
-              <div style={{ fontSize: 14, fontWeight: 700, color: '#6b7280', marginBottom: 12 }}>
-                BANKA HESAP BİLGİLERİ
-              </div>
-              <div style={{ display: 'grid', gap: 10 }}>
-                <div>
-                  <div style={{ fontSize: 12, color: '#6b7280' }}>Banka</div>
-                  <div style={{ fontSize: 14, fontWeight: 700, color: '#111827' }}>
-                    {BANK_TRANSFER_INFO.bankName}
-                  </div>
-                </div>
-                <div>
-                  <div style={{ fontSize: 12, color: '#6b7280' }}>Hesap Sahibi</div>
-                  <div style={{ fontSize: 14, fontWeight: 700, color: '#111827' }}>
-                    {BANK_TRANSFER_INFO.accountHolder}
-                  </div>
-                </div>
-                <div>
-                  <div style={{ fontSize: 12, color: '#6b7280' }}>IBAN</div>
-                  <div
-                    style={{
-                      fontSize: 14,
-                      fontWeight: 700,
-                      color: '#111827',
-                      fontFamily: 'monospace',
-                      background: '#ffffff',
-                      padding: '8px 12px',
-                      borderRadius: 8,
-                      border: '1px solid #e5e7eb',
-                    }}
-                  >
-                    {BANK_TRANSFER_INFO.iban}
-                  </div>
-                </div>
-                <div
-                  style={{
-                    marginTop: 8,
-                    padding: 12,
-                    background: '#fffbeb',
-                    border: '1px solid #fde68a',
-                    borderRadius: 12,
-                    fontSize: 13,
-                    color: '#92400e',
-                  }}
-                >
-                  {BANK_TRANSFER_INFO.description}
-                </div>
-              </div>
-            </div>
+            <h2 style={{ margin: 0, fontSize: 24, fontWeight: 800, color: '#111827' }}>
+              Kredi Kartı ile Ödeme
+            </h2>
+            <p style={{ marginTop: 8, fontSize: 14, color: '#6b7280' }}>
+              iyzico güvencesiyle güvenli ödeme yapın
+            </p>
 
             {subscription && (
-              <BillingForm
+              <IyzicoPaymentForm
                 subscriptionId={subscription.id}
                 planPrice={(subscription.subscription_plans as any)?.price_monthly || 800}
+                salonId={salon.id}
+                userEmail={user.email || ''}
+                userPhone={salon.phone || ''}
               />
             )}
           </section>

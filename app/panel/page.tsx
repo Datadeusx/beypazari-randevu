@@ -38,5 +38,5 @@ export default async function PanelIndexPage() {
   }
 
   const salon = salons[0];
-  redirect(`/panel/${toSlug(salon.name)}`);
+  redirect(`/panel/${salon.slug}`);
 }

@@ -93,17 +93,15 @@ export default function HomePage() {
           <div className="landing-heroGrid">
             <div>
               <div className="landing-heroBadge">
-                Beypazarı için sade ve güçlü randevu altyapısı
+                Randevularınızı dijitalleştirin, işletmenizi büyütün
               </div>
 
               <h1 className="landing-heroTitle">
-                Güzellik salonları ve kuaförler için modern online randevu sistemi
+                Kuaförler, Güzellik Salonları ve Butik İşletmeler İçin Profesyonel Online Randevu Sistemi
               </h1>
 
               <p className="landing-heroText">
-                Müşterileriniz online randevu alsın, siz panelden hizmetleri,
-                çalışma saatlerini, randevuları ve kampanyaları kolayca yönetin.
-                Sade, hızlı ve kullanışlı bir sistem.
+                Telefonda randevu kaosu son bulsun. Müşterileriniz 7/24 online randevu alsın, siz işinize odaklanın. Otomatik hatırlatmalar, boş saat kampanyaları ve müşteri geri kazanım sistemleriyle doluluk oranınızı %40'a kadar artırın.
               </p>
 
               <div className="landing-heroActions">
@@ -111,20 +109,20 @@ export default function HomePage() {
                   href="/salon/nurseda-guzellik-salonu"
                   className="landing-lightButton"
                 >
-                  Demo Randevu Sayfasını Aç
+                  🎯 Canlı Demo'yu Görün
                 </Link>
 
                 <Link href="/kayit" className="landing-outlineLightButton">
-                  Salon Kaydı
+                  Ücretsiz Deneyin
                 </Link>
               </div>
 
               <div className="landing-heroTags">
                 {[
-                  "Online randevu",
-                  "SMS logları",
-                  "Boş saat kampanyası",
-                  "Salon paneli",
+                  "7/24 Online Randevu",
+                  "Otomatik SMS Hatırlatma",
+                  "Boş Saat Kampanyaları",
+                  "Müşteri Geri Kazanım",
                 ].map((item) => (
                   <span key={item} className="landing-heroTag">
                     {item}
@@ -149,24 +147,25 @@ export default function HomePage() {
             </div>
 
             <div className="landing-heroInfoCard">
-              <div className="landing-heroInfoTop">Başlangıç Paketi</div>
+              <div className="landing-heroInfoTop">🎁 14 Gün Ücretsiz Deneyin</div>
               <div className="landing-heroInfoPrice">500 - 750 TL</div>
               <p className="landing-heroInfoText">
-                Küçük ve orta ölçekli salonlar için hızlı kurulum, sade kullanım,
-                randevu akışı ve müşteri geri kazanım odaklı yapı.
+                Kredi kartı gerekmez. Anında başlayın, farkı görün. İstediğiniz zaman iptal edebilirsiniz. Kurulum ve eğitim ücretsiz!
               </p>
 
               <div className="landing-heroInfoList">
                 <div className="landing-heroInfoItem">
-                  • Online randevu sayfası
+                  ✅ Sınırsız randevu ve müşteri
                 </div>
                 <div className="landing-heroInfoItem">
-                  • Hizmet ve saat yönetimi
+                  ✅ Otomatik SMS hatırlatmaları
                 </div>
                 <div className="landing-heroInfoItem">
-                  • SMS ve kampanya altyapısı
+                  ✅ Boş saat kampanya sistemi
                 </div>
-                <div className="landing-heroInfoItem">• Salon paneli</div>
+                <div className="landing-heroInfoItem">
+                  ✅ Profesyonel salon paneli
+                </div>
               </div>
 
               <a
@@ -175,7 +174,7 @@ export default function HomePage() {
                 rel="noreferrer"
                 className="landing-whatsAppButton"
               >
-                WhatsApp ile Demo İste
+                💬 WhatsApp'tan Hemen Bilgi Al
               </a>
             </div>
           </div>
@@ -183,28 +182,27 @@ export default function HomePage() {
 
         <section id="ozellikler" className="landing-sectionSpace">
           <div className="landing-sectionHead">
-            <h2 className="landing-sectionTitle">Öne çıkan özellikler</h2>
+            <h2 className="landing-sectionTitle">İşletmenizi Büyüten Akıllı Özellikler</h2>
             <p className="landing-sectionSubtitle">
-              Salon sahibinin işini kolaylaştıran, müşterinin ise hızlıca
-              randevu alabildiği bir yapı.
+              Sadece randevu almakla kalmayın, müşterilerinizi geri kazanın ve doluluk oranınızı maksimuma çıkarın.
             </p>
           </div>
 
           <div className="landing-gridThree">
             <FeatureCard
-              icon="📅"
-              title="Müşteri için kolay rezervasyon"
-              text="Salon linkini açan müşteri, hizmet seçip uygun saatleri görür ve dakikalar içinde randevu oluşturur."
+              icon="📱"
+              title="7/24 Online Randevu - Hiç Kaçırmayın"
+              text="Müşterileriniz gece yarısı bile randevu alabilir. Telefonla uğraşmadan, sadece linki paylaşın. Müşteriler hizmet seçer, uygun saati görür, dakikalar içinde randevu oluşturur. Telefon trafiğiniz %80 azalır."
             />
             <FeatureCard
-              icon="⚡"
-              title="Salon sahibi için tek ekran yönetim"
-              text="Yaklaşan randevular, bugünün planı, çalışma saatleri, hizmetler ve kampanyalar tek panelde toplanır."
+              icon="💰"
+              title="Boş Saatlerinizi Paraya Çevirin"
+              text="Gün içinde boş kalan saatleriniz mi var? Sistemimiz otomatik olarak SMS ile müşterilerinize özel indirimli kampanyalar gönderir. Boş saatler dolar, geliriniz artar. Ortalama %35 doluluk artışı sağlayın."
             />
             <FeatureCard
-              icon="🎯"
-              title="Boş saatleri fırsata çevir"
-              text="İzin veren müşterilere boş saat kampanyası veya geri kazanım mesajı göndererek doluluğu artır."
+              icon="🔄"
+              title="Unutulan Müşterileri Geri Getirin"
+              text="30-60 gün önce gelip bir daha dönmeyen müşterileriniz var mı? Akıllı hatırlatma sistemi onları otomatik tespit eder ve özel geri dönüş kampanyaları gönderir. Her ay kayıp müşterilerinizin %20'sini geri kazanın."
             />
           </div>
         </section>
@@ -212,27 +210,27 @@ export default function HomePage() {
         <section id="nasil-calisir" className="landing-sectionSpace">
           <div className="landing-whiteSection">
             <div className="landing-sectionHead">
-              <h2 className="landing-sectionTitle">Nasıl çalışır?</h2>
+              <h2 className="landing-sectionTitle">3 Adımda Başlayın, Hemen Kazanmaya Başlayın</h2>
               <p className="landing-sectionSubtitle">
-                Kurulum basit, kullanım daha da basit.
+                Karmaşık kurulum yok, teknik bilgi gerektirmez. 10 dakikada sisteminiz hazır!
               </p>
             </div>
 
             <div className="landing-gridThree">
               <StepCard
-                step="1. ADIM"
-                title="Salon bilgilerini ayarla"
-                text="Panelden hizmetlerini ve çalışma saatlerini gir. Sana özel randevu sayfan otomatik oluşsun."
+                step="1️⃣ 5 DAKİKA"
+                title="Salonunuzu Oluşturun"
+                text="İsim, telefon ve hizmetlerinizi girin. Çalışma saatlerinizi belirleyin. Sistem otomatik olarak size özel randevu sayfanızı oluşturur. Hiçbir teknik bilgi gerekmez."
               />
               <StepCard
-                step="2. ADIM"
-                title="Müşteriler linkten randevu alsın"
-                text="Müşterilerin hizmet seçsin, uygun saatleri görsün ve online randevusunu oluştursun."
+                step="2️⃣ 2 DAKİKA"
+                title="Linkinizi Paylaşın"
+                text="Hazır olan randevu linkinizi WhatsApp durumunuzda, Instagram bio'nuzda ve Google profilinizde paylaşın. Müşterileriniz artık 7/24 randevu alabilir. Telefon çalmayı beklemeden."
               />
               <StepCard
-                step="3. ADIM"
-                title="Randevuları ve kampanyaları yönet"
-                text="Randevu akışını takip et, hatırlatma ve kampanya süreçleriyle verimini artır."
+                step="3️⃣ OTOMATİK"
+                title="Otopilotta Kazanın"
+                text="Sistem otomatik olarak randevuları yönetir, SMS hatırlatmaları gönderir, boş saatler için kampanya yapar ve eski müşterilerinizi geri kazanır. Siz sadece müşterilerinize hizmet verin."
               />
             </div>
           </div>
@@ -241,15 +239,16 @@ export default function HomePage() {
         <section className="landing-sectionSpace">
           <div className="landing-gridTwoWide">
             <div className="landing-whiteSection">
-              <h2 className="landing-sectionTitle">Kimler için uygun?</h2>
+              <h2 className="landing-sectionTitle">Hangi İşletmeler Kullanıyor?</h2>
 
               <div className="landing-stackList">
                 {[
-                  "Güzellik salonları",
-                  "Kuaförler",
-                  "Cilt bakım merkezleri",
-                  "Kirpik ve kaş hizmeti veren işletmeler",
-                  "Butik ve yerel salonlar",
+                  "💇‍♀️ Kadın Kuaförleri - Saç, manikür, pedikür randevuları",
+                  "✂️ Erkek Berberleri - Saç, sakal bakım randevuları",
+                  "✨ Güzellik Salonları - Cilt bakımı, makyaj, epilasyon",
+                  "👁️ Kirpik & Kaş Stüdyoları - Microblading, ipek kirpik",
+                  "💅 Tırnak Salonları - Protez tırnak, nail art hizmetleri",
+                  "🌸 Butik İşletmeler - Randevulu çalışan her türlü hizmet",
                 ].map((item) => (
                   <div key={item} className="landing-listItem">
                     {item}
@@ -259,14 +258,18 @@ export default function HomePage() {
             </div>
 
             <div id="fiyat" className="landing-whiteSection">
-              <h2 className="landing-sectionTitle">Başlangıç paketi</h2>
+              <h2 className="landing-sectionTitle">Şeffaf Fiyatlandırma</h2>
 
               <div className="landing-pricingBox">
-                <div className="landing-pricingLabel">Aylık</div>
+                <div className="landing-pricingLabel">Aylık Abonelik</div>
                 <div className="landing-pricingPrice">500 - 750 TL</div>
                 <div className="landing-pricingText">
-                  Online randevu sayfası, salon paneli, SMS altyapısı ve kampanya
-                  yönetimi ile sade bir başlangıç paketi.
+                  ✅ Sınırsız randevu ve müşteri
+                  <br />✅ SMS kredileri dahil
+                  <br />✅ Tüm özellikler açık
+                  <br />✅ Ücretsiz kurulum ve eğitim
+                  <br />✅ WhatsApp destek
+                  <br />✅ 14 gün ücretsiz deneme
                 </div>
               </div>
 
@@ -274,7 +277,7 @@ export default function HomePage() {
                 href="/kayit"
                 className="landing-darkButton landing-marginTop18"
               >
-                Salonunu Oluştur
+                🚀 Hemen Ücretsiz Başla
               </Link>
             </div>
           </div>
@@ -286,12 +289,10 @@ export default function HomePage() {
               <Logo dark={false} />
             </div>
 
-            <h2 className="landing-darkCtaTitle">Salonunu dijitale taşı</h2>
+            <h2 className="landing-darkCtaTitle">Yarın Değil, Bugün Dijitalleşin!</h2>
 
             <p className="landing-darkCtaText">
-              Daha az telefon trafiği, daha düzenli randevu akışı, daha güçlü
-              müşteri geri dönüşü. Beypazarı’ndan başlayıp büyüyen salonlar için
-              sade ve güçlü bir sistem.
+              Rakipleriniz dijitalleşirken siz geride kalmayın. Her gün kaybettiğiniz randevular, her ay geri dönmeyen müşteriler... Artık telefonda saatlerce vakit harcamayın. Sistem sizin için çalışsın, siz de işinize odaklanın. 14 gün ücretsiz deneyin, farkı görün!
             </p>
 
             <div className="landing-heroActions">
@@ -299,11 +300,11 @@ export default function HomePage() {
                 href="/salon/nurseda-guzellik-salonu"
                 className="landing-lightButton"
               >
-                Demo Sayfayı Göster
+                🎯 Canlı Demo'yu İncele
               </Link>
 
               <Link href="/kayit" className="landing-outlineLightButton">
-                Hemen Başla
+                🚀 Ücretsiz Başla
               </Link>
             </div>
           </div>
@@ -312,21 +313,21 @@ export default function HomePage() {
         <section id="iletisim" className="landing-sectionSpace">
           <div className="landing-gridThree">
             <ContactCard
-              title="WhatsApp"
+              title="💬 WhatsApp Destek"
               value="+90 500 000 00 00"
-              text="Demo talebi, kurulum ve detaylı bilgi için doğrudan WhatsApp üzerinden iletişime geçebilirsiniz."
+              text="Anında destek alın! Demo gösterimi, kurulum yardımı ve tüm sorularınız için WhatsApp'tan yazın. Genelde 10 dakika içinde yanıt veriyoruz."
             />
 
             <ContactCard
-              title="E-posta"
+              title="📧 E-posta"
               value="info@ornekdomain.com"
-              text="Kurumsal kullanım, fiyatlandırma ve destek için e-posta ile bize ulaşabilirsiniz."
+              text="Detaylı bilgi, özel fiyatlandırma teklifleri ve kurumsal işbirlikleri için e-posta gönderin."
             />
 
             <ContactCard
-              title="Hizmet Bölgesi"
-              value="Beypazarı"
-              text="İlk aşamada Beypazarı odaklı başlıyoruz. Sonrasında farklı ilçe ve şehirlere açılabilir."
+              title="📍 Hizmet Bölgesi"
+              value="Türkiye Geneli"
+              text="Beypazarı merkezli başladık ancak şu anda Türkiye'nin her yerinden salonlara hizmet veriyoruz. Online kurulum ile hemen başlayabilirsiniz!"
             />
           </div>
         </section>
@@ -335,12 +336,11 @@ export default function HomePage() {
           <div className="landing-demoStrip">
             <div>
               <h2 className="landing-sectionTitle landing-noMarginBottom">
-                Hemen demo iste
+                ⚡ 5 Dakikada Sisteminiz Hazır!
               </h2>
 
               <p className="landing-sectionSubtitle landing-demoSubtitle">
-                Salonuna özel kurulum, randevu sayfası ve panel yapısını birlikte
-                gösterebiliriz. İstersen WhatsApp’tan yaz, sistemi canlı anlatalım.
+                Hemen kayıt olun, salonunuzu oluşturun ve ilk randevunuzu almaya başlayın. Sorularınız için WhatsApp'tan yazın, ekibimiz size özel demo gösterimi yapabilir. 14 gün tamamen ücretsiz deneyin!
               </p>
             </div>
 
@@ -350,7 +350,7 @@ export default function HomePage() {
               rel="noreferrer"
               className="landing-whatsAppButton"
             >
-              WhatsApp ile İletişime Geç
+              💬 Hemen WhatsApp'tan Yaz
             </a>
           </div>
         </section>
@@ -361,8 +361,7 @@ export default function HomePage() {
               <Logo dark={false} />
 
               <p className="landing-footerText">
-                Güzellik salonları ve kuaförler için sade, modern ve sonuç odaklı
-                online randevu çözümü.
+                Kuaförler, güzellik salonları ve butik işletmeler için akıllı online randevu sistemi. Doluluk oranınızı artırın, müşterilerinizi geri kazanın, işinize odaklanın.
               </p>
             </div>
 
@@ -374,13 +373,13 @@ export default function HomePage() {
                 Salon Girişi
               </Link>
               <Link href="/kayit" className="landing-footerLink">
-                Salon Kaydı
+                🎁 Ücretsiz Başla
               </Link>
             </div>
           </div>
 
           <div className="landing-footerBottom">
-            © 2026 Beypazari Randevu. Tüm hakları saklıdır.
+            © 2026 Beypazari Randevu - Randevularınızı Dijitalleştirin, İşletmenizi Büyütün
           </div>
         </footer>
       </div>

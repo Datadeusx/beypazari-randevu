@@ -166,12 +166,11 @@ export default async function PanelSlugPage({ params }: PageProps) {
   const supabase = await createClient();
   const { slug } = await params;
 
-  const { data: salons, error: salonError } = await supabase
+  const { data: salon, error: salonError } = await supabase
     .from("salons")
-    .select("*");
-
-  const salon =
-    salons?.find((item: any) => toSlug(item.name || "") === slug) || null;
+    .select("*")
+    .eq("slug", slug)
+    .single();
 
   if (salonError || !salon) {
     redirect("/giris");
