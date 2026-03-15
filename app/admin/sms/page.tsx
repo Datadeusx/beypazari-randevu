@@ -67,7 +67,7 @@ export default async function AdminSMSPage() {
     .eq("month_year", currentMonth)
     .order("sms_sent", { ascending: false });
 
-  const usages = (usageData || []) as SMSUsage[];
+  const usages = (usageData || []) as unknown as SMSUsage[];
 
   // Get failed SMS logs (last 100)
   const { data: failedLogs } = await supabase
@@ -91,7 +91,7 @@ export default async function AdminSMSPage() {
     .order("created_at", { ascending: false })
     .limit(100);
 
-  const failed = (failedLogs || []) as SMSLog[];
+  const failed = (failedLogs || []) as unknown as SMSLog[];
 
   // Get recent SMS logs (last 100)
   const { data: recentLogs } = await supabase
@@ -114,7 +114,7 @@ export default async function AdminSMSPage() {
     .order("created_at", { ascending: false })
     .limit(100);
 
-  const recent = (recentLogs || []) as SMSLog[];
+  const recent = (recentLogs || []) as unknown as SMSLog[];
 
   // Calculate total statistics
   const totalSent = usages.reduce((sum, u) => sum + u.sms_sent, 0);

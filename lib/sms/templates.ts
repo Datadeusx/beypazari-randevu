@@ -9,7 +9,7 @@ export interface SMSTemplate {
   key: string;
   name: string;
   content: string;
-  variables: string[];
+  variables: readonly string[];
   description: string;
 }
 
@@ -97,7 +97,7 @@ export function renderTemplate(
     throw new Error(`Template "${templateKey}" not found`);
   }
 
-  let content = template.content;
+  let content: string = template.content;
 
   // Replace all variables
   for (const [key, value] of Object.entries(variables)) {

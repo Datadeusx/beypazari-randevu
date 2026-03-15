@@ -65,8 +65,6 @@
  * );
  */
 
-import { createClient } from '@/lib/supabase/server';
-
 export const STORAGE_BUCKET = 'salon-galleries';
 export const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
 export const ALLOWED_MIME_TYPES = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'];
@@ -104,25 +102,3 @@ export function generateStoragePath(salonId: string, fileName: string): string {
   return `${salonId}/${timestamp}-${randomId}-${cleanFileName}`;
 }
 
-/**
- * Gets the public URL for a stored image
- */
-export async function getPublicUrl(storagePath: string): Promise<string> {
-  const supabase = await createClient();
-  const { data } = supabase.storage.from(STORAGE_BUCKET).getPublicUrl(storagePath);
-  return data.publicUrl;
-}
-
-/**
- * Deletes a file from storage
- */
-export async function deleteFromStorage(storagePath: string): Promise<{ success: boolean; error?: string }> {
-  const supabase = await createClient();
-  const { error } = await supabase.storage.from(STORAGE_BUCKET).remove([storagePath]);
-
-  if (error) {
-    return { success: false, error: error.message };
-  }
-
-  return { success: true };
-}
