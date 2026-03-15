@@ -144,7 +144,7 @@ export default function CampaignSection({
             Bugunun Bos Saatleri
           </div>
 
-          {!emptySlotsToday || emptySlotsToday.length === 0 ? (
+          {!parsedSlots || parsedSlots.length === 0 ? (
             <div style={{ color: "#4b5563" }}>Bugun bos saat yok.</div>
           ) : (
             <div
@@ -154,7 +154,7 @@ export default function CampaignSection({
                 gap: 10,
               }}
             >
-              {emptySlotsToday.map((slot) => (
+              {parsedSlots.map((slot) => (
                 <span
                   key={slot}
                   style={{
