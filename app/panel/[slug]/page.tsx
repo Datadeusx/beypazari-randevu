@@ -170,7 +170,7 @@ export default async function PanelSlugPage({ params }: PageProps) {
     .from("salons")
     .select("*")
     .eq("slug", slug)
-    .single();
+    .maybeSingle();
 
   if (salonError || !salon) {
     redirect("/giris");

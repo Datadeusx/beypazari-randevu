@@ -29,7 +29,7 @@ export default async function BillingPage({ params }: PageProps) {
     .from('salons')
     .select('id, name, slug, user_id, phone')
     .eq('slug', slug)
-    .single();
+    .maybeSingle();
 
   if (!salon || salon.user_id !== user.id) {
     redirect('/panel');
@@ -54,7 +54,7 @@ export default async function BillingPage({ params }: PageProps) {
     `
     )
     .eq('salon_id', salon.id)
-    .single();
+    .maybeSingle();
 
   // Get trial info
   const trialInfo = await getTrialInfo(salon.id);
