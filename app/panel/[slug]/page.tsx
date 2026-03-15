@@ -253,11 +253,23 @@ export default async function PanelSlugPage({ params }: PageProps) {
     .eq("salon_id", salon.id)
     .order("day_of_week", { ascending: true });
 
-  const { data: smsLogs } = await supabase
-    .from("sms_logs")
-    .select("*")
-    .order("created_at", { ascending: false })
-    .limit(20);
+  // Try to get SMS logs, but handle error if table doesn't exist or salon_id column is missing
+  let smsLogs: any[] = [];
+  try {
+    const { data, error } = await supabase
+      .from("sms_logs")
+      .select("*")
+      .eq("salon_id", salon.id)
+      .order("created_at", { ascending: false })
+      .limit(20);
+
+    if (!error) {
+      smsLogs = data || [];
+    }
+  } catch (e) {
+    // SMS logs might not be available yet, use empty array
+    smsLogs = [];
+  }
 
   const { data: monthlyAppointments } = await supabase
     .from("appointments")
@@ -267,22 +279,36 @@ export default async function PanelSlugPage({ params }: PageProps) {
     .lt("appointment_time", monthEnd.toISOString())
     .neq("status", "cancelled");
 
-  const { count: eligibleCustomerCount } = await supabase
-    .from("customers")
-    .select("*", { count: "exact", head: true })
-    .eq("salon_id", salon.id)
-    .eq("sms_marketing_opt_in", true);
+  // Try to get customer counts, but handle error gracefully
+  let eligibleCustomerCount = 0;
+  try {
+    const { count } = await supabase
+      .from("customers")
+      .select("*", { count: "exact", head: true })
+      .eq("salon_id", salon.id)
+      .eq("sms_marketing_opt_in", true);
+    eligibleCustomerCount = count || 0;
+  } catch (e) {
+    eligibleCustomerCount = 0;
+  }
 
-  const { data: inactiveCustomers } = await supabase
-    .from("customers")
-    .select(
-      "id, name, phone, last_appointment_at, visit_count, sms_marketing_opt_in"
-    )
-    .eq("salon_id", salon.id)
-    .eq("sms_marketing_opt_in", true)
-    .gte("last_appointment_at", days60Ago.toISOString())
-    .lte("last_appointment_at", days30Ago.toISOString())
-    .order("last_appointment_at", { ascending: true });
+  // Try to get inactive customers, but handle error gracefully
+  let inactiveCustomers: any[] = [];
+  try {
+    const { data } = await supabase
+      .from("customers")
+      .select(
+        "id, name, phone, last_appointment_at, visit_count, sms_marketing_opt_in"
+      )
+      .eq("salon_id", salon.id)
+      .eq("sms_marketing_opt_in", true)
+      .gte("last_appointment_at", days60Ago.toISOString())
+      .lte("last_appointment_at", days30Ago.toISOString())
+      .order("last_appointment_at", { ascending: true });
+    inactiveCustomers = data || [];
+  } catch (e) {
+    inactiveCustomers = [];
+  }
 
   const monthlyList = monthlyAppointments || [];
 
