@@ -55,7 +55,35 @@ export default function LoginPage() {
     }
 
     const salon = salons[0];
-    const slug = salon.slug;
+    let slug = salon.slug;
+
+    // If slug doesn't exist (old data), generate it from name and update DB
+    if (!slug && salon.name) {
+      slug = salon.name
+        .toLowerCase()
+        .replace(/ı/g, "i")
+        .replace(/İ/g, "i")
+        .replace(/ğ/g, "g")
+        .replace(/ü/g, "u")
+        .replace(/ş/g, "s")
+        .replace(/ö/g, "o")
+        .replace(/ç/g, "c")
+        .replace(/[^a-z0-9\s-]/g, "")
+        .trim()
+        .replace(/\s+/g, "-");
+
+      // Update the salon with the generated slug
+      await supabase
+        .from("salons")
+        .update({ slug })
+        .eq("id", salon.id);
+    }
+
+    if (!slug) {
+      setMessage("Salon bilgisi eksik. Lütfen destek ile iletişime geçin.");
+      setLoading(false);
+      return;
+    }
 
     window.location.href = `/panel/${slug}`;
   }
